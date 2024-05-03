@@ -1,0 +1,29 @@
+﻿@model IEnumerable<ShipperResponseModel>
+<h1>Shipper List</h1>
+<a asp-action="Create" asp-controller="Shipper">Add New Shipper</a>
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Options</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <Td>@item.Id</Td>
+                <td>@item.Name</td>
+                <td>@item.EmailId</td>
+                <td>
+                    <a asp-action="Detail" asp-controller="Shipper" asp-route-id="@item.Id">View Details</a> |
+                    <a asp-action="Edit" asp-controller="Shipper" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Delete" asp-controller="Shipper" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+
+        }
+    </tbody>
+</table>

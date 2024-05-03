@@ -1,0 +1,20 @@
+﻿@model PromotionResponseModel
+<h1>Are you sure you want to delete this promotion?</h1>
+<form asp-action="delete" asp-controller="Promotion">
+    <div>
+        <label>Name</label>
+        <input type="text" disabled value="@Model.Name" name="Name" class="form-control" />
+        <label>Description</label>
+        <input type="text" disabled value="@Model.Description" name="Description" class="form-control" />
+        <label>Discount</label>
+        <input type="number" disabled value="@Model.Discount" name="Discount" class="form-control" />
+        <label>Start Date</label>
+        <input type="datetime" disabled value="@Model.StartDate" name="StartDate" class="form-control" />
+        <label>End Date</label>
+        <input type="datetime" disabled value="@Model.EndDate" name="EndDate" class="form-control" />
+        <input type="hidden" value="@Model.Id" name="Id" />
+    </div>
+    <button class="btn btn-danger">Delete</button>
+
+</form>
+

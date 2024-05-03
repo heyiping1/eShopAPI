@@ -1,0 +1,7 @@
+﻿@model ProductCategoryResponseModel
+
+<h1> @Model.Name Products</h1>
+@foreach (var item in ViewBag.Products)
+{
+    <partial name="_ProductCard" model="@item" />
+}

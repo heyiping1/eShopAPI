@@ -1,0 +1,30 @@
+﻿@model ProductResponseModel
+<form asp-action="Edit" asp-controller="Product">
+    <div class="my-2">
+        <label>Name</label>
+        <input type="text" name="Name" value="@Model.Name" class="form-control" />
+    </div>
+    <div class="my-2">
+        <label>Description</label>
+        <input type="text" name="Description" value="@Model.Description" class="form-control" />
+    </div>
+    <div class="my-2">
+        <label>Category </label>
+        <select name="CategoryId" value="@Model.Category.Name" class="form-control">
+            <option>Select a Category</option>
+            @foreach (var category in ViewBag.Categories)
+            {
+                <option value="@category.Value">@category.Text</option>
+            }
+        </select>
+    </div>
+    <div class="my-2">
+        <label>Price </label>
+        <input type="number" class="form-control" value="@Model.Price" name="Price" />
+    </div>
+    <div class="my-2">
+        <label>Product Image </label>
+        <input type="text" class="form-control" value="@Model.ProductImage" name="ProductImage" />
+    </div>
+    <button class="btn-primary btn">Update</button>
+</form>

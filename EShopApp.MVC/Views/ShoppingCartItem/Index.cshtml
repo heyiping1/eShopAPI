@@ -1,0 +1,29 @@
+﻿@model IEnumerable<ShoppingCartItemResponseModel>
+<h1>Shopping Cart Items</h1>
+<a asp-action="Create" asp-controller="ShoppingCartItem">Add New Products to the Cart</a>
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Options</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <Td>@item.Id</Td>
+                <td>@item.ProductName</td>
+                <td>@item.Qty</td>
+                <td>
+                    <a asp-action="Detail" asp-controller="ShoppingCartItem" asp-route-id="@item.Id">View Detail</a> |
+                    <a asp-action="Edit" asp-controller="ShoppingCartItem" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Delete" asp-controller="ShoppingCartItem" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+
+        }
+    </tbody>
+</table>

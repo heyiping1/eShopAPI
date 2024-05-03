@@ -1,0 +1,15 @@
+﻿@model ShipperResponseModel
+<form asp-action="Edit" asp-controller="Shipper">
+    <div class="form-group">
+        <label for="Name">Name</label>
+        <input type="text" name="Name" value="@Model.Name" class="form-control" />
+        <label for="Email">Email</label>
+        <input type="text" name="EmailId" value="@Model.EmailId" class="form-control" />
+        <label for="Phone">Phone</label>
+        <input type="text" name="Phone" value="@Model.Phone" class="form-control" />
+        <label for="ContactPerson">Contact</label>
+        <input type="text" name="ContactPerson" value="@Model.ContactPerson" class="form-control" />
+        <input type="hidden" name="Id" value="@Model.Id" />
+    </div>
+    <button class="btn-primary btn">Update</button>
+</form>
