@@ -77,8 +77,7 @@ namespace EShop.MVC.Controllers
         public IActionResult Detail(int id)
         {
             var item = _categoryService.GetById(id);
-            ViewBag.Products = _productService.GetAll()
-                .Where(x => x.CategoryId == id);
+            ViewBag.Products = _productService.GetProductsByCategory(id);
             return View(item);
         }
 

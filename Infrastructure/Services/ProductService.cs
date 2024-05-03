@@ -43,6 +43,12 @@ namespace Infrastructure.Service
             return null;
         }
 
+        public IEnumerable<ProductResponseModel> GetProductsByCategory(int categoryId)
+        {
+            var products = _productRepository.GetProductsByCategory(categoryId);
+            return _mapper.Map<IEnumerable<ProductResponseModel>>(products);
+        }
+
         public int Delete(int id)
         {
             return _productRepository.Delete(id);

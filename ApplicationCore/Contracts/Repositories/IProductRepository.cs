@@ -1,4 +1,5 @@
 ﻿using ApplicationCore.Entities;
+using ApplicationCore.Models.Responses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +10,6 @@ namespace ApplicationCore.Contracts.Repositories
 {
     public interface IProductRepository : IBaseRepository<Product>
     {
+        IEnumerable<Product> GetProductsByCategory(int categoryId);
     }
 }
