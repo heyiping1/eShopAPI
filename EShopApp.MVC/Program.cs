@@ -12,16 +12,16 @@ builder.Services.AddControllersWithViews();
 
 #region repository_injection
 //Repository injection
-builder.Services.AddScoped<IProductCategoryRepository, ProductCategoryRepository>();
-builder.Services.AddScoped<IProductRepository, ProductRepository>();
-builder.Services.AddScoped<IShipperRepository, ShipperRepository>();
-builder.Services.AddScoped<IPromotionRepository, PromotionRepository>();
-builder.Services.AddScoped<IShoppingCartItemRepository, ShoppingCartItemRepository>();
+builder.Services.AddScoped<IProductCategoryRepository, ProductCategoryRepositoryAsync>();
+builder.Services.AddScoped<IProductRepository, ProductRepositoryAsync>();
+builder.Services.AddScoped<IShipperRepositoryAsync, ShipperRepositoryAsync>();
+builder.Services.AddScoped<IPromotionRepositoryAsync, PromotionRepository>();
+builder.Services.AddScoped<IShoppingCartItemRepositoryAsync, ShoppingCartItemRepositoryAsync>();
 #endregion
 
 //Service injection
-builder.Services.AddScoped<IProductCategoryService, ProductCategoryService>();
-builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IProductCategoryService, ProductCategoryServiceAsync>();
+builder.Services.AddScoped<IProductService, ProductServiceAsync>();
 builder.Services.AddScoped<IShipperService, ShipperService>();
 builder.Services.AddScoped<IPromotionService, PromotionService>();
 builder.Services.AddScoped<IShoppingCartItemService, ShoppingCartItemService>();

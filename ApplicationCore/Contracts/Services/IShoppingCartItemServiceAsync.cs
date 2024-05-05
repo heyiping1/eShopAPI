@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Contracts.Services
 {
-    public interface IProductCategoryService : IBaseService<ProductCategoryRequestModel, ProductCategoryResponseModel>
+    public interface IShoppingCartItemServiceAsync : IBaseServiceAsync<ShoppingCartItemRequestModel, ShoppingCartItemResponseModel>
     {
     }
 }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Contracts.Services
 {
-    public interface IPromotionService : IBaseService<PromotionRequestModel, PromotionResponseModel>
+    public interface IShipperServiceAsync : IBaseServiceAsync<ShipperRequestModel, ShipperResponseModel>
     {
     }
 }

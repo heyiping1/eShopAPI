@@ -10,8 +10,8 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Repositories
 {
-    public class ProductCategoryRepository : BaseRepository<ProductCategory>, IProductCategoryRepository
+    public class ProductCategoryRepositoryAsync : BaseRepositoryAsync<ProductCategory>, IProductCategoryRepositoryAsync
     {
-        public ProductCategoryRepository(EShopDbContext context) : base(context) { }
+        public ProductCategoryRepositoryAsync(EShopDbContext context) : base(context) { }
     }
 }

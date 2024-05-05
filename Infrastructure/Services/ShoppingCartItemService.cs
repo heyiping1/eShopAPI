@@ -13,24 +13,24 @@ using AutoMapper;
 
 namespace Infrastructure.Service
 {
-    public class ShoppingCartItemService : IShoppingCartItemService
+    public class ShoppingCartItemServiceAsync : IShoppingCartItemServiceAsync
     {
-        private readonly IShoppingCartItemRepository _shoppingCartItemRepository;
+        private readonly IShoppingCartItemRepositoryAsync _shoppingCartItemRepository;
         private readonly IMapper _mapper;
-        public ShoppingCartItemService(IShoppingCartItemRepository shoppingCartItemRepository, IMapper mapper)
+        public ShoppingCartItemServiceAsync(IShoppingCartItemRepositoryAsync shoppingCartItemRepository, IMapper mapper)
         {
             _shoppingCartItemRepository = shoppingCartItemRepository;
             _mapper = mapper;
         }
-        public IEnumerable<ShoppingCartItemResponseModel> GetAll()
+        public async Task<IEnumerable<ShoppingCartItemResponseModel>> GetAllAsync()
         {
-            var categories = _shoppingCartItemRepository.GetAll();
+            var categories = _shoppingCartItemRepository.GetAllAsync();
             return _mapper.Map<IEnumerable<ShoppingCartItemResponseModel>>(categories);
         }
 
-        public ShoppingCartItemResponseModel GetById(int id)
+        public async Task<ShoppingCartItemResponseModel> GetByIdAsync(int id)
         {
-            var product = _shoppingCartItemRepository.GetById(id);
+            var product = _shoppingCartItemRepository.GetByIdAsync(id);
             if (product != null)
             {
                 return _mapper.Map<ShoppingCartItemResponseModel>(product);
@@ -38,21 +38,21 @@ namespace Infrastructure.Service
             return null;
         }
 
-        public int Delete(int id)
+        public async Task<int> DeleteAsync(int id)
         {
-            return _shoppingCartItemRepository.Delete(id);
+            return await _shoppingCartItemRepository.DeleteAsync(id);
         }
 
-        public int Add(ShoppingCartItemRequestModel model)
+        public async Task<int> AddAsync(ShoppingCartItemRequestModel model)
         {
             var category = _mapper.Map<ShoppingCartItem>(model);
-            return _shoppingCartItemRepository.Add(category);
+            return await _shoppingCartItemRepository.AddAsync(category);
         }
 
-        public int Update(ShoppingCartItemRequestModel model)
+        public async Task<int> UpdateAsync(ShoppingCartItemRequestModel model)
         {
             var category = _mapper.Map<ShoppingCartItem>(model);
-            return _shoppingCartItemRepository.Update(category);
+            return await _shoppingCartItemRepository.UpdateAsync(category);
         }
     }
 }

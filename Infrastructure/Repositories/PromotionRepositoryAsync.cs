@@ -10,8 +10,8 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Repositories
 {
-    public class ShipperRepository : BaseRepository<Shipper>, IShipperRepository
+    public class PromotionRepositoryAsync : BaseRepositoryAsync<Promotion>, IPromotionRepositoryAsync
     {
-        public ShipperRepository(EShopDbContext context) : base(context) { }
+        public PromotionRepositoryAsync(EShopDbContext context) : base(context) { }
     }
 }

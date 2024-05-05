@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Contracts.Repositories
 {
-    public interface IPromotionRepository : IBaseRepository<Promotion>
+    public interface IShipperRepositoryAsync : IBaseRepositoryAsync<Shipper>
     {
     }
 }

@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Contracts.Repositories
 {
-    public interface IProductRepository : IBaseRepository<Product>
+    public interface IProductRepositoryAsync : IBaseRepositoryAsync<Product>
     {
-        IEnumerable<Product> GetProductsByCategory(int categoryId);
+        Task<IEnumerable<Product>> GetProductsByCategoryAsync(int categoryId, int pageNumber, int pageSize);
     }
 }

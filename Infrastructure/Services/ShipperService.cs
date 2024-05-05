@@ -13,24 +13,24 @@ using AutoMapper;
 
 namespace Infrastructure.Service
 {
-    public class ShipperService : IShipperService
+    public class ShipperServiceAsync : IShipperServiceAsync
     {
-        private readonly IShipperRepository _shipperRepository;
+        private readonly IShipperRepositoryAsync _shipperRepository;
         private readonly IMapper _mapper;
-        public ShipperService(IShipperRepository shipperRepository, IMapper mapper)
+        public ShipperServiceAsync(IShipperRepositoryAsync shipperRepository, IMapper mapper)
         {
             _shipperRepository = shipperRepository;
             _mapper = mapper;
         }
-        public IEnumerable<ShipperResponseModel> GetAll()
+        public async Task<IEnumerable<ShipperResponseModel>> GetAllAsync()
         {
-            var categories = _shipperRepository.GetAll();
+            var categories = _shipperRepository.GetAllAsync();
             return _mapper.Map<IEnumerable<ShipperResponseModel>>(categories);
         }
 
-        public ShipperResponseModel GetById(int id)
+        public async Task<ShipperResponseModel> GetByIdAsync(int id)
         {
-            var product = _shipperRepository.GetById(id);
+            var product = _shipperRepository.GetByIdAsync(id);
             if (product != null)
             {
                 return _mapper.Map<ShipperResponseModel>(product);
@@ -38,21 +38,21 @@ namespace Infrastructure.Service
             return null;
         }
 
-        public int Delete(int id)
+        public async Task<int> DeleteAsync(int id)
         {
-            return _shipperRepository.Delete(id);
+            return await _shipperRepository.DeleteAsync(id);
         }
 
-        public int Add(ShipperRequestModel model)
+        public async Task<int> AddAsync(ShipperRequestModel model)
         {
             var category = _mapper.Map<Shipper>(model);
-            return _shipperRepository.Add(category);
+            return await _shipperRepository.AddAsync(category);
         }
 
-        public int Update(ShipperRequestModel model)
+        public async Task<int> UpdateAsync(ShipperRequestModel model)
         {
             var category = _mapper.Map<Shipper>(model);
-            return _shipperRepository.Update(category);
+            return await _shipperRepository.UpdateAsync(category);
         }
     }
 }

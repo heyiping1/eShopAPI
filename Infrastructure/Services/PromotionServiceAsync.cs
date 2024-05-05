@@ -13,24 +13,24 @@ using AutoMapper;
 
 namespace Infrastructure.Service
 {
-    public class PromotionService : IPromotionService
+    public class PromotionServiceAsync : IPromotionServiceAsync
     {
-        private readonly IPromotionRepository _promotionRepository;
+        private readonly IPromotionRepositoryAsync _promotionRepository;
         private readonly IMapper _mapper;
-        public PromotionService(IPromotionRepository promotionRepository, IMapper mapper)
+        public PromotionServiceAsync(IPromotionRepositoryAsync promotionRepository, IMapper mapper)
         {
             _promotionRepository = promotionRepository;
             _mapper = mapper;
         }
-        public IEnumerable<PromotionResponseModel> GetAll()
+        public async Task<IEnumerable<PromotionResponseModel>> GetAllAsync()
         {
-            var categories = _promotionRepository.GetAll();
+            var categories = _promotionRepository.GetAllAsync();
             return _mapper.Map<IEnumerable<PromotionResponseModel>>(categories);
         }
 
-        public PromotionResponseModel GetById(int id)
+        public async Task<PromotionResponseModel> GetByIdAsync(int id)
         {
-            var product = _promotionRepository.GetById(id);
+            var product = _promotionRepository.GetByIdAsync(id);
             if (product != null)
             {
                 return _mapper.Map<PromotionResponseModel>(product);
@@ -38,21 +38,21 @@ namespace Infrastructure.Service
             return null;
         }
 
-        public int Delete(int id)
+        public async Task<int> DeleteAsync(int id)
         {
-            return _promotionRepository.Delete(id);
+            return await _promotionRepository.DeleteAsync(id);
         }
 
-        public int Add(PromotionRequestModel model)
+        public async Task<int> AddAsync(PromotionRequestModel model)
         {
             var category = _mapper.Map<Promotion>(model);
-            return _promotionRepository.Add(category);
+            return await _promotionRepository.AddAsync(category);
         }
 
-        public int Update(PromotionRequestModel model)
+        public async Task<int> UpdateAsync(PromotionRequestModel model)
         {
             var category = _mapper.Map<Promotion>(model);
-            return _promotionRepository.Update(category);
+            return await _promotionRepository.UpdateAsync(category);
         }
     }
 }

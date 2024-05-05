@@ -13,24 +13,24 @@ using AutoMapper;
 
 namespace Infrastructure.Service
 {
-    public class ProductCategoryService : IProductCategoryService
+    public class ProductCategoryServiceAsync : IProductCategoryServiceAsync
     {
-        private readonly IProductCategoryRepository _productCategoryRepository;
+        private readonly IProductCategoryRepositoryAsync _productCategoryRepository;
         private readonly IMapper _mapper;
-        public ProductCategoryService(IProductCategoryRepository productCategoryRepository, IMapper mapper)
+        public ProductCategoryServiceAsync(IProductCategoryRepositoryAsync productCategoryRepository, IMapper mapper)
         {
             _productCategoryRepository = productCategoryRepository;
             _mapper = mapper;
         }
-        public IEnumerable<ProductCategoryResponseModel> GetAll()
+        public async Task<IEnumerable<ProductCategoryResponseModel>> GetAllAsync()
         {
-            var categories = _productCategoryRepository.GetAll();
+            var categories = _productCategoryRepository.GetAllAsync();
             return _mapper.Map<IEnumerable<ProductCategoryResponseModel>>(categories);
         }
 
-        public ProductCategoryResponseModel GetById(int id)
+        public async Task<ProductCategoryResponseModel> GetByIdAsync(int id)
         {
-            var product = _productCategoryRepository.GetById(id);
+            var product = _productCategoryRepository.GetByIdAsync(id);
             if (product != null)
             {
                 return _mapper.Map<ProductCategoryResponseModel>(product);
@@ -38,21 +38,21 @@ namespace Infrastructure.Service
             return null;
         }
 
-        public int Delete(int id)
+        public async Task<int> DeleteAsync(int id)
         {
-            return _productCategoryRepository.Delete(id);
+            return await _productCategoryRepository.DeleteAsync(id);
         }
 
-        public int Add(ProductCategoryRequestModel model)
+        public async Task<int> AddAsync(ProductCategoryRequestModel model)
         {
             var category = _mapper.Map<ProductCategory>(model);
-            return _productCategoryRepository.Add(category);
+            return await _productCategoryRepository.AddAsync(category);
         }
 
-        public int Update(ProductCategoryRequestModel model)
+        public async Task<int> UpdateAsync(ProductCategoryRequestModel model)
         {
             var category = _mapper.Map<ProductCategory>(model);
-            return _productCategoryRepository.Update(category);
+            return await _productCategoryRepository.UpdateAsync(category);
         }
     }
 }

@@ -10,8 +10,8 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Repositories
 {
-    public class ShoppingCartItemRepository : BaseRepository<ShoppingCartItem>, IShoppingCartItemRepository
+    public class ShoppingCartItemRepositoryAsync : BaseRepositoryAsync<ShoppingCartItem>, IShoppingCartItemRepositoryAsync
     {
-        public ShoppingCartItemRepository(EShopDbContext context) : base(context) { }
+        public ShoppingCartItemRepositoryAsync(EShopDbContext context) : base(context) { }
     }
 }
