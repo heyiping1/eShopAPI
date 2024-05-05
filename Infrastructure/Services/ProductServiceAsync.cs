@@ -29,13 +29,13 @@ namespace Infrastructure.Service
 
         public async Task<IEnumerable<ProductResponseModel>> GetAllAsync()
         {
-            var products = _productRepository.GetAllAsync();
+            var products = await _productRepository.GetAllAsync();
             return _mapper.Map<IEnumerable<ProductResponseModel>>(products);
         }
 
         public async Task<ProductResponseModel> GetByIdAsync(int id)
         {
-            var product = _productRepository.GetByIdAsync(id);
+            var product = await _productRepository.GetByIdAsync(id);
             if (product != null)
             {
                 return _mapper.Map<ProductResponseModel>(product);
@@ -45,7 +45,7 @@ namespace Infrastructure.Service
 
         public async Task<IEnumerable<ProductResponseModel>> GetProductsByCategoryAsync(int categoryId, int pageNumber = 1, int pageSize = 30)
         {
-            var products = _productRepository.GetProductsByCategoryAsync(categoryId, pageNumber, pageSize);
+            var products = await _productRepository.GetProductsByCategoryAsync(categoryId, pageNumber, pageSize);
             return _mapper.Map<IEnumerable<ProductResponseModel>>(products);
         }
 

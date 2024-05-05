@@ -16,7 +16,8 @@ namespace Infrastructure.Repositories
         public ProductRepositoryAsync(EShopDbContext context) : base(context) { }
         public async Task<IEnumerable<Product>> GetProductsByCategoryAsync(int categoryId, int pageNumber = 1, int pageSize = 30)
         {
-           return await _context.Set<Product>().Where(x => x.CategoryId == categoryId).Skip(pageNumber).Take(pageSize).ToListAsync();
+            var products = await GetAllAsync();
+           return products.Where(x => x.CategoryId == categoryId).Skip(pageNumber).Take(pageSize);
         }
     }
 }

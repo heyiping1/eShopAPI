@@ -9,25 +9,26 @@ namespace EShop.MVC.Controllers
 {
     public class ProductController : Controller
     {
-        private readonly IProductService _productService;
-        private readonly IProductCategoryService _categoryService;
-        public ProductController(IProductService productService, IProductCategoryService categoryService)
+        private readonly IProductServiceAsync _productServiceAsync;
+        private readonly IProductCategoryServiceAsync _categoryServiceAsync;
+        public ProductController(IProductServiceAsync productServiceAsync, IProductCategoryServiceAsync categoryServiceAsync)
         {
-            _productService = productService;
-            _categoryService = categoryService;
+            _productServiceAsync = productServiceAsync;
+            _categoryServiceAsync = categoryServiceAsync;
         }
 
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var collection = _productService.GetAll();
+            var collection = await _productServiceAsync.GetAllAsync();
             return View(collection);
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            ViewBag.Categories = _categoryService.GetAll().Select(x => new SelectListItem()
+            var categories = await _categoryServiceAsync.GetAllAsync();
+            ViewBag.Categories = categories.Select(x => new SelectListItem()
             {
                 Text = x.Name,
                 Value = x.Id.ToString()
@@ -36,14 +37,15 @@ namespace EShop.MVC.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(ProductRequestModel model)
+        public async Task<IActionResult> Create(ProductRequestModel model)
         {
             if (ModelState.IsValid)
             {
-                _productService.Add(model);
+                await _productServiceAsync.AddAsync(model);
                 return RedirectToAction("Index");
             }
-            ViewBag.Categories = _categoryService.GetAll().Select(x => new SelectListItem()
+            var categories = await _categoryServiceAsync.GetAllAsync();
+            ViewBag.Categories = categories.Select(x => new SelectListItem()
             {
                 Text = x.Name,
                 Value = x.Id.ToString()
@@ -51,24 +53,25 @@ namespace EShop.MVC.Controllers
             return View();
         }
 
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            var item = _productService.GetById(id);
+            var item = await _productServiceAsync.GetByIdAsync(id);
             return View(item);
         }
 
         [HttpPost]
-        public IActionResult Delete(ProductRequestModel model)
+        public async Task<IActionResult> Delete(ProductRequestModel model)
         {
-            _productService.Delete(model.Id);
+            await _productServiceAsync.DeleteAsync(model.Id);
             return RedirectToAction("Index");
         }
 
         [HttpGet]
-        public IActionResult Edit(int id)
+        public async Task<IActionResult> Edit(int id)
         {
-            var item = _productService.GetById(id);
-            ViewBag.Categories = _categoryService.GetAll().Select(x => new SelectListItem()
+            var item = await _productServiceAsync.GetByIdAsync(id);
+            var category = await _categoryServiceAsync.GetAllAsync();
+            ViewBag.Categories = category.Select(x => new SelectListItem()
             {
                 Text = x.Name,
                 Value = x.Id.ToString()
@@ -77,14 +80,15 @@ namespace EShop.MVC.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(ProductRequestModel model)
+        public async Task<IActionResult> Edit(ProductRequestModel model)
         {
             if (ModelState.IsValid)
             {
-                _productService.Update(model);
+                await _productServiceAsync.UpdateAsync(model);
                 return RedirectToAction("Index");
             }
-            ViewBag.Categories = _categoryService.GetAll().Select(x => new SelectListItem()
+            var category = await _categoryServiceAsync.GetAllAsync();
+            ViewBag.Categories = category.Select(x => new SelectListItem()
             {
                 Text = x.Name,
                 Value = x.Id.ToString()
@@ -94,10 +98,10 @@ namespace EShop.MVC.Controllers
         }
 
         [HttpGet]
-        public IActionResult Detail(int id)
+        public async Task<IActionResult> Detail(int id)
         {
-            var item = _productService.GetById(id);
-            ViewBag.CategoryName = _categoryService.GetById(item.CategoryId).Name;
+            var item = await _productServiceAsync.GetByIdAsync(id);
+            ViewBag.CategoryName = (await _categoryServiceAsync.GetByIdAsync(item.CategoryId)).Name;
             return View(item);
         }
 

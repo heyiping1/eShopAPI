@@ -24,13 +24,13 @@ namespace Infrastructure.Service
         }
         public async Task<IEnumerable<ShipperResponseModel>> GetAllAsync()
         {
-            var categories = _shipperRepository.GetAllAsync();
+            var categories = await _shipperRepository.GetAllAsync();
             return _mapper.Map<IEnumerable<ShipperResponseModel>>(categories);
         }
 
         public async Task<ShipperResponseModel> GetByIdAsync(int id)
         {
-            var product = _shipperRepository.GetByIdAsync(id);
+            var product = await _shipperRepository.GetByIdAsync(id);
             if (product != null)
             {
                 return _mapper.Map<ShipperResponseModel>(product);

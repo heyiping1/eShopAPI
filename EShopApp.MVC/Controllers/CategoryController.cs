@@ -9,25 +9,25 @@ namespace EShop.MVC.Controllers
 {
     public class CategoryController : Controller
     {
-        private readonly IProductCategoryService _categoryService;
-        private readonly IProductService _productService;
-        public CategoryController(IProductCategoryService productCategoryService, IProductService productService)
+        private readonly IProductCategoryServiceAsync _categoryServiceAsync;
+        private readonly IProductServiceAsync _productServiceAsync;
+        public CategoryController(IProductCategoryServiceAsync productCategoryServiceAsync, IProductServiceAsync productServiceAsync)
         {
-            _categoryService = productCategoryService;
-            _productService = productService;
+            _categoryServiceAsync = productCategoryServiceAsync;
+            _productServiceAsync = productServiceAsync;
         }
 
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var collection = _categoryService.GetAll();
+            var collection = await _categoryServiceAsync.GetAllAsync();
             return View(collection);
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            return View();
+            return awView();
         }
 
         [HttpPost]
@@ -35,7 +35,7 @@ namespace EShop.MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                _categoryService.Add(model);
+                _categoryServiceAsync.AddAsync(model);
                 return RedirectToAction("Index");
             }
             return View();
@@ -43,21 +43,21 @@ namespace EShop.MVC.Controllers
 
         public IActionResult Delete(int id)
         {
-            var item = _categoryService.GetById(id);
+            var item = _categoryServiceAsync.GetByIdAsync(id);
             return View(item);
         }
 
         [HttpPost]
         public IActionResult Delete(ProductCategoryRequestModel model)
         {
-            _categoryService.Delete(model.Id);
+            _categoryServiceAsync.DeleteAsync(model.Id);
             return RedirectToAction("Index");
         }
 
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            var item = _categoryService.GetById(id);
+            var item = _categoryServiceAsync.GetByIdAsync(id);
             return View(item);
         }
 
@@ -66,7 +66,7 @@ namespace EShop.MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                _categoryService.Update(model);
+                _categoryServiceAsync.UpdateAsync(model);
                 return RedirectToAction("Index");
             }
             return View(model);
@@ -76,8 +76,8 @@ namespace EShop.MVC.Controllers
         [HttpGet]
         public IActionResult Detail(int id)
         {
-            var item = _categoryService.GetById(id);
-            ViewBag.Products = _productService.GetProductsByCategory(id);
+            var item = _categoryServiceAsync.GetByIdAsync(id);
+            ViewBag.Products = _productServiceAsync.GetProductsByCategoryAsync(id, 1, 30);
             return View(item);
         }
 
