@@ -1,4 +1,5 @@
 ﻿using ApplicationCore.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Data
 {
-    public class EShopDbContext : DbContext
+    public class EShopDbContext : IdentityDbContext<ApplicationUser>
     {
         public EShopDbContext(DbContextOptions<EShopDbContext> options) :
             base(options)
@@ -37,6 +38,7 @@ namespace Infrastructure.Data
         }
 
         public DbSet<Address> Addresses { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<CategoryVariation> CategoryVariations { get; set; }
         public DbSet<Customer> Customer { get; set; }
         public DbSet<Product> Product { get; set; }

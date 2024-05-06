@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 
-namespace Infrastructure.Service
+namespace Infrastructure.Services
 {
     public class ShoppingCartItemServiceAsync : IShoppingCartItemServiceAsync
     {
