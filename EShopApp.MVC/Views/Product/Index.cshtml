@@ -1,7 +1,0 @@
-﻿@model IEnumerable<ProductResponseModel>
-<h1>Product List</h1>
-<a asp-action="Create" asp-controller="Product">Add New Product</a> 
-@foreach (var item in Model)
-{
-    <partial name="_ProductCard" model="@item"/>
-}
