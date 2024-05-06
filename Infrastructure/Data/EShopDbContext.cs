@@ -37,9 +37,9 @@ namespace Infrastructure.Data
             }
         }
 
-        public DbSet<Address> Addresses { get; set; }
-        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
-        public DbSet<CategoryVariation> CategoryVariations { get; set; }
+        public DbSet<Address> Address { get; set; }
+        public DbSet<ApplicationUser> ApplicationUser { get; set; }
+        public DbSet<CategoryVariation> CategoryVariation { get; set; }
         public DbSet<Customer> Customer { get; set; }
         public DbSet<Product> Product { get; set; }
         public DbSet<ProductCategory> ProductCategory { get; set; }

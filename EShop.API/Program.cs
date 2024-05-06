@@ -61,7 +61,6 @@ builder.Services.AddAuthentication(option =>
 
 }).AddJwtBearer(option =>
 {
-
     option.SaveToken = true;
     option.RequireHttpsMetadata = false;
     option.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
@@ -79,7 +78,6 @@ builder.Services.AddDbContext<EShopDbContext>(context => {
 });
 
 builder.Services.AddAutoMapper(typeof(Program));
-
 
 // Add services to the container.
 
