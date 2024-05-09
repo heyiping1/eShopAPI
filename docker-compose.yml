@@ -1,0 +1,36 @@
+version: '3.4'
+
+services:
+  productcatalog.api:
+    image: ${DOCKER_REGISTRY-}productcatalogapi
+    build:
+      context: .
+      dockerfile: ProductCatalog.API/Dockerfile
+
+  promotion.api:
+    image: ${DOCKER_REGISTRY-}promotionapi
+    build:
+      context: .
+      dockerfile: Promotion.API/Dockerfile
+
+
+  base.api:
+    image: ${DOCKER_REGISTRY-}baseapi
+    build:
+      context: .
+      dockerfile: Base.API/Dockerfile
+
+
+  shipper.api:
+    image: ${DOCKER_REGISTRY-}shipperapi
+    build:
+      context: .
+      dockerfile: Shipper.API/Dockerfile
+
+
+  shoppingcart.api:
+    image: ${DOCKER_REGISTRY-}shoppingcartapi
+    build:
+      context: .
+      dockerfile: ShoppingCart.API/Dockerfile
+
